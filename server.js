@@ -1,6 +1,6 @@
 import Express from "express";
 import Cors from 'cors';
-import { conectarServer, getDB } from './db/db.js';
+import { conectarServer } from './db/db.js';
 import dotenv from 'dotenv';
 import rutasVentas from "./views/ventas/rutas.js";
 
