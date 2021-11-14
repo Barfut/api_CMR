@@ -10,12 +10,11 @@ const queryAllUsuarios = async (callback) => {
 }
 
 const crearUsuario = async (datosUsuarios,callback) => {
-    if (Object.keys(datosUsuarios).includes('fecha') &&
-        Object.keys(datosUsuarios).includes('cedula') &&
+    if (Object.keys(datosUsuarios).includes('email') &&
+        Object.keys(datosUsuarios).includes('apellido') &&
         Object.keys(datosUsuarios).includes('nombre') && 
-        Object.keys(datosUsuarios).includes('producto') && 
-        Object.keys(datosUsuarios).includes('cantidad') && 
-        Object.keys(datosUsuarios).includes('valorUnitario')
+        Object.keys(datosUsuarios).includes('roll') && 
+        Object.keys(datosUsuarios).includes('estado')
         ){  
             const conexion = getDB();
             await conexion.
