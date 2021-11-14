@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js';
 
 const queryAllVentas = async (callback) => {
@@ -17,7 +18,7 @@ const crearVenta = async (datosVentas,callback) => {
         Object.keys(datosVentas).includes('valorUnitario')
         ){  
             const conexion = getDB();
-            conexion.
+            await conexion.
             collection('venta').
             insertOne(datosVentas, callback)
         } else {
@@ -25,5 +26,21 @@ const crearVenta = async (datosVentas,callback) => {
         }
 } 
     
+const editarVenta  = async (edicion, callback) => {
+    const filtroVenta = {_id: new ObjectId(edicion.id)}
+    delete edicion.id
+    const operacion = {
+        $set: edicion,
+    }
+    const conexion = getDB();
+    await conexion
+    .collection('venta')
+    .findOneAndUpdate(
+        filtroVenta, 
+        operacion, 
+        {upsert: true, returnOriginal:true}, callback)
+      
+}
 
-export { queryAllVentas , crearVenta}
+
+export { queryAllVentas , crearVenta, editarVenta}
