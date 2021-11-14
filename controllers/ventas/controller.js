@@ -15,7 +15,8 @@ const crearVenta = async (datosVentas,callback) => {
         Object.keys(datosVentas).includes('nombre') && 
         Object.keys(datosVentas).includes('producto') && 
         Object.keys(datosVentas).includes('cantidad') && 
-        Object.keys(datosVentas).includes('valorUnitario')
+        Object.keys(datosVentas).includes('valorUnitario') && 
+        Object.keys(datosVentas).includes('vendedor')
         ){  
             const conexion = getDB();
             await conexion.
