@@ -1,6 +1,5 @@
 import Express from "express";
-import { crearVenta, editarVenta, queryAllVentas } from "../../controllers/ventas/controller.js";
-import { getDB } from '../../db/db.js';
+import { crearVenta, editarVenta, eliminarVentas, queryAllVentas } from "../../controllers/ventas/controller.js";
 
 const rutasVentas = Express.Router()
 
@@ -27,18 +26,7 @@ rutasVentas.route('/ventas/editar').patch((req, res) => {
 })
 
 rutasVentas.route('/ventas/eliminar').delete((req, res) => {
-    const filtroVenta = {_id: new ObjectId(req.body.id)}
-    const conexion = getDB();
-    conexion
-    .collection('venta').deleteOne(filtroVenta, (err, result) => {
-        if(err) {
-            console.error('error al eliminar venta:', err);
-            res.sendStatus(500);  
-        } else {
-            console.log('eliminado');
-            res.sendStatus(200);
-        }
-    });
+    eliminarVentas (req.body.id, genercCallback(res))
 })
 
 export default rutasVentas

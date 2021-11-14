@@ -42,5 +42,11 @@ const editarVenta  = async (edicion, callback) => {
       
 }
 
+const eliminarVentas = async (id, callback) => {
+    const filtroVenta = {_id: new ObjectId(id)}
+    const conexion = getDB();
+    await conexion
+    .collection('venta').deleteOne(filtroVenta, callback)
+}
 
-export { queryAllVentas , crearVenta, editarVenta}
+export { queryAllVentas , crearVenta, editarVenta, eliminarVentas}
