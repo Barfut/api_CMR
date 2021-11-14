@@ -10,19 +10,16 @@ const queryAllInventario = async (callback) => {
 }
 
 const crearInventario = async (datosInventario,callback) => {
-    if (Object.keys(datosInventario).includes('fecha') &&
-        Object.keys(datosInventario).includes('cedula') &&
-        Object.keys(datosInventario).includes('nombre') && 
-        Object.keys(datosInventario).includes('producto') && 
-        Object.keys(datosInventario).includes('cantidad') && 
-        Object.keys(datosInventario).includes('valorUnitario')
+    if (Object.keys(datosInventario).includes('producto') && 
+        Object.keys(datosInventario).includes('valorUnitario') && 
+        Object.keys(datosInventario).includes('estado')
         ){  
             const conexion = getDB();
             await conexion.
             collection('inventario').
             insertOne(datosInventario, callback)
         } else {
-            res.sendStatus(500);
+            return 'error'
         }
 } 
     

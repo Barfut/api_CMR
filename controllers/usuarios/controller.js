@@ -22,7 +22,7 @@ const crearUsuario = async (datosUsuarios,callback) => {
             collection('usuario').
             insertOne(datosUsuarios, callback)
         } else {
-            res.sendStatus(500);
+            return 'error'
         }
 } 
     

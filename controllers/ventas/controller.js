@@ -22,7 +22,7 @@ const crearVenta = async (datosVentas,callback) => {
             collection('venta').
             insertOne(datosVentas, callback)
         } else {
-            res.sendStatus(500);
+            return 'error'
         }
 } 
     
