@@ -1,5 +1,5 @@
 import Express from "express";
-import { crearVenta, editarVenta, eliminarVentas, queryAllVentas } from "../../controllers/ventas/controller.js";
+import { crearVenta, consultarVenta, editarVenta, eliminarVentas, queryAllVentas } from "../../controllers/ventas/controller.js";
 
 const rutasVentas = Express.Router()
 
@@ -13,20 +13,25 @@ const genercCallback = (res) => (err, result) => {
 
 
 rutasVentas.route('/ventas').get((req, res) => {
-    console.log('Get en la ruta');
     queryAllVentas(genercCallback(res));
 });
 
-rutasVentas.route('/ventas/nueva').post((req, res) => {
+rutasVentas.route('/ventas').post((req, res) => {
     crearVenta (req.body, genercCallback(res))
 });
 
-rutasVentas.route('/ventas/editar').patch((req, res) => {
-    editarVenta (req.body, genercCallback(res))
+rutasVentas.route('/ventas/:id').patch((req, res) => {
+    editarVenta (req.params.id, req.body, genercCallback(res))
 })
 
-rutasVentas.route('/ventas/eliminar').delete((req, res) => {
-    eliminarVentas (req.body.id, genercCallback(res))
+rutasVentas.route('/ventas/:id').delete((req, res) => {
+    eliminarVentas (req.params.id, genercCallback(res))
 })
+
+
+rutasVentas.route('/ventas/:id').get((req, res) => {
+    consultarVenta(req.params.id, genercCallback(res));
+});
+
 
 export default rutasVentas
