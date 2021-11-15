@@ -5,7 +5,7 @@ const rutasVentas = Express.Router()
 
 const genercCallback = (res) => (err, result) => {
     if(err) {            
-        res.sendStatus(400).send ('Error consultando ventas')
+        res.status(500).json({ error: err })
     } else {
         res.json(result);
     }
